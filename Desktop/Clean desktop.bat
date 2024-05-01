@@ -12,15 +12,15 @@ set "code_folder=%organised_folder%\Code"
 set "images_folder=%organised_folder%\Images"
 set "pdf_folder=%organised_folder%\PDF"
 
-rem Check if Organised folder exists, if not create it
+:: Check if Organised folder exists, if not create it
 if not exist "%organised_folder%" mkdir "%organised_folder%"
 
-rem Check if Applications folder exists, if not create it inside Organised folder
+:: Check if Applications folder exists, if not create it inside Organised folder
 if not exist "%applications_folder%" (
     mkdir "%applications_folder%"
 )
 
-rem Check if Shortcuts folder exists, if not create it inside Organised folder
+:: Check if Shortcuts folder exists, if not create it inside Organised folder
 if not exist "%shortcuts_folder%" (
     mkdir "%shortcuts_folder%"
 )
@@ -30,34 +30,34 @@ for %%F in ("%applications_folder%" "%shortcuts_folder%" "%zip_folder%" "%txt_fo
     if not exist "%%F" mkdir "%%F"
 )
 
-rem Move all application shortcuts to Applications folder
+:: Move all application shortcuts to Applications folder
 move "%desktop%\*.lnk" "%applications_folder%"
 
-rem Move all internet shortcuts to Shortcuts folder
+:: Move all internet shortcuts to Shortcuts folder
 move "%desktop%\*.url" "%shortcuts_folder%"
 
-rem Move all zip files to ZIP folder
+:: Move all zip files to ZIP folder
 move "%desktop%\*.zip" "%zip_folder%"
 
-rem Move all txt files to TextFiles folder
+:: Move all txt files to TextFiles folder
 move "%desktop%\*.txt" "%txt_folder%"
 
-rem Move all folders to Folders folder
+:: Move all folders to Folders folder
 move "%desktop%\*File Folder" "%folders_folder%"
 
-rem Move all docx files to TextFiles folder
+:: Move all docx files to TextFiles folder
 move "%desktop%\*.docx" "%txt_folder%"
 
-rem Move all exe files to Applications folder
+:: Move all exe files to Applications folder
 move "%desktop%\*.exe" "%applications_folder%"
 
-rem Combine java and class files into Code folder
+:: Combine java and class files into Code folder
 move "%desktop%\*.java" "%code_folder%" > nul 2>&1
 move "%desktop%\*.class" "%code_folder%" > nul 2>&1
 move "%desktop%\*.html" "%code_folder%" > nul 2>&1
 move "%desktop%\*.htm" "%code_folder%" > nul 2>&1
 
-rem Move all jpg files to Images folder
+:: Move all jpg files to Images folder
 move "%desktop%\*.jpg" "%images_folder%"
 move "%desktop%\*.png" "%images_folder%"
 
