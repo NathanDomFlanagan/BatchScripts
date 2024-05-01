@@ -13,56 +13,48 @@ set "images_folder=%organised_folder%\Images"
 set "pdf_folder=%organised_folder%\PDF"
 
 :: Check if Organised folder exists, if not create it
-if not exist "%organised_folder%" mkdir "%organised_folder%"
-
-:: Check if Applications folder exists, if not create it inside Organised folder
-if not exist "%applications_folder%" (
-    mkdir "%applications_folder%"
-)
-
-:: Check if Shortcuts folder exists, if not create it inside Organised folder
-if not exist "%shortcuts_folder%" (
-    mkdir "%shortcuts_folder%"
+echo Checking if Organised folder exists...
+if not exist "%organised_folder%" (
+    echo "Organised folder does not exist. Creating...
+    mkdir "%organised_folder%"
+    echo "Organised" folder created.
+	echo.
+) else (
+    echo "Organised" folder already exists.
+	echo.
 )
 
 :: Create subfolders if they don't exist
 for %%F in ("%applications_folder%" "%shortcuts_folder%" "%zip_folder%" "%txt_folder%" "%folders_folder%" "%code_folder%" "%images_folder%" "%pdf_folder%") do (
-    if not exist "%%F" mkdir "%%F"
+    echo Checking if "%%~nxF" folder exists...
+    if not exist "%%~F" (
+        echo "%%~nxF" folder does not exist. Creating...
+        mkdir "%%~F"
+        echo "%%~nxF" folder created.
+		echo.
+    ) else (
+        echo "%%~nxF" folder already exists.
+		echo.
+    )
 )
 
-:: Move all application shortcuts to Applications folder
-move "%desktop%\*.lnk" "%applications_folder%"
+:: Move files to respective folders
+echo Moving files to respective folders... && echo.
+move "%desktop%\*.lnk" "%applications_folder%" > nul 2>&1 && echo Moved .lnk files to Applications folder. && echo.
+move "%desktop%\*.url" "%shortcuts_folder%" > nul 2>&1 && echo Moved .url files to Shortcuts folder. && echo.
+move "%desktop%\*.zip" "%zip_folder%" > nul 2>&1 && echo Moved .zip files to ZIP folder. && echo.
+move "%desktop%\*.txt" "%txt_folder%" > nul 2>&1 && echo Moved .txt files to TextFiles folder. && echo.
+move "%desktop%\*File Folder" "%folders_folder%" > nul 2>&1 && echo Moved folders to Folders folder. && echo.
+move "%desktop%\*.docx" "%txt_folder%" > nul 2>&1 && echo Moved .docx files to TextFiles folder. && echo.
+move "%desktop%\*.exe" "%applications_folder%" > nul 2>&1 && echo Moved .exe files to Applications folder. && echo.
+move "%desktop%\*.java" "%code_folder%" > nul 2>&1 && echo Moved .java files to Code folder. && echo.
+move "%desktop%\*.class" "%code_folder%" > nul 2>&1 && echo Moved .class files to Code folder. && echo.
+move "%desktop%\*.html" "%code_folder%" > nul 2>&1 && echo Moved .html files to Code folder. && echo.
+move "%desktop%\*.htm" "%code_folder%" > nul 2>&1 && echo Moved .htm files to Code folder. && echo.
+move "%desktop%\*.jpg" "%images_folder%" > nul 2>&1 && echo Moved .jpg files to Images folder. && echo.
+move "%desktop%\*.png" "%images_folder%" > nul 2>&1 && echo Moved .png files to Images folder. && echo.
+move "%desktop%\*.pdf" "%pdf_folder%" > nul 2>&1 && echo Moved .pdf files to PDF folder. && echo.
 
-:: Move all internet shortcuts to Shortcuts folder
-move "%desktop%\*.url" "%shortcuts_folder%"
 
-:: Move all zip files to ZIP folder
-move "%desktop%\*.zip" "%zip_folder%"
-
-:: Move all txt files to TextFiles folder
-move "%desktop%\*.txt" "%txt_folder%"
-
-:: Move all folders to Folders folder
-move "%desktop%\*File Folder" "%folders_folder%"
-
-:: Move all docx files to TextFiles folder
-move "%desktop%\*.docx" "%txt_folder%"
-
-:: Move all exe files to Applications folder
-move "%desktop%\*.exe" "%applications_folder%"
-
-:: Combine java and class files into Code folder
-move "%desktop%\*.java" "%code_folder%" > nul 2>&1
-move "%desktop%\*.class" "%code_folder%" > nul 2>&1
-move "%desktop%\*.html" "%code_folder%" > nul 2>&1
-move "%desktop%\*.htm" "%code_folder%" > nul 2>&1
-
-:: Move all jpg files to Images folder
-move "%desktop%\*.jpg" "%images_folder%"
-move "%desktop%\*.png" "%images_folder%"
-
-:: Move all pdf files to PDF folder
-move "%desktop%\*.pdf" "%pdf_folder%"
-
-echo Done.
+echo Finished cleaning up.
 pause
