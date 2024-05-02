@@ -1,6 +1,7 @@
 @echo off
 
 :: Set folder paths
+Rem Sometimes there is a directory between User and Desktop, so just add one between them, e.g. "Users\placeholder\Desktop"
 set "desktop=%USERPROFILE%\Desktop"
 set "organised_folder=%desktop%\Organised"
 set "applications_folder=%organised_folder%\Applications"
